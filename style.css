@@ -1,0 +1,99 @@
+body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #fb3;
+    color: #1c282b;
+    font-family: 'Noto Sans', sans-serif;
+}
+
+form {
+    margin: 0;
+    padding: 2rem;
+    border: 0;
+    border-radius: 0.2rem;
+    width: 13rem;
+    height: auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+
+    background-color: #fff;
+    filter: drop-shadow(0 0 1rem #0002);
+}
+
+form h1 {
+    margin: 0;
+    width: 100%;
+
+    font-size: 1.5rem;
+}
+
+form h2 {
+    margin: 0;
+    width: 100%;
+
+    font-size: 1.05rem;
+}
+
+form p {
+    margin: 1rem 0;
+    width: 100%;
+    font-size: 1.0rem;
+}
+
+form ul {
+    margin: 0.2rem 0 1.2rem;
+    padding: 0;
+    border: 0;
+    width: 100%;
+    list-style: none;
+}
+
+form ul li{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+form ul li span{
+    width: auto;
+}
+
+form span {
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+form label {
+    width: 100%;
+    font-size: 0.9rem;
+}
+
+form input {
+    margin: 0.3rem 0;
+    padding: 0 0.4rem;
+    width: 100%;
+    height: 2rem;
+    box-sizing: border-box;
+}
+
+form input[type="submit"] {
+    margin: 0.5rem 0 0;
+    border: 0;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #fff;
+    background-color: #489;
+}

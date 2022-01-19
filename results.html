@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Crypto API benchmark</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&amp;family=Ubuntu:wght@700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <script type="module">
+        import { test_SHA } from './SHA.js';
+        import { test_AES } from './AES.js';
+        import { test_PBKDF2 } from './PBKDF2.js';
+
+        function append(tag_name, content, sibling) {
+            const element = document.createElement(tag_name);
+            element.innerText = content;
+            sibling.insertAdjacentElement('beforebegin', element);
+
+            return element;
+        }
+
+        function append_results(title, results, sibling) {
+            const h2 = append('h2', title, sibling);
+            const container = append('ul', '', sibling);
+            for(const [test, result] of Object.entries(results)) {
+                const row = document.createElement('li');
+
+                const test_tag = document.createElement('span');
+                test_tag.innerText = test;
+                row.appendChild(test_tag);
+                
+                const result_tag = document.createElement('span');
+                result_tag.innerText = result + 'ms';
+                row.appendChild(result_tag);
+                
+                container.appendChild(row);
+            }
+        }
+
+        async function test() {
+            const SHA_size = +((new URL(location)).searchParams.get('SHA-size') || 1024);
+            const AES_size = +((new URL(location)).searchParams.get('AES-size') || 1024);
+            const PBKDF2_rounds = +((new URL(location)).searchParams.get('PBKDF2-rounds') || 1000000);
+
+            const SHA_results = await test_SHA(1024 ** 2 * SHA_size);
+            const AES_results = await test_AES(1024 ** 2 * AES_size);
+            const PBKDF2_results = await test_PBKDF2(PBKDF2_rounds);
+
+            const submit_button = document.querySelector('input[type="submit"]');
+
+            append('p', 'Benchmark for testing Web Crypto API performance on browsers.', submit_button);
+            
+            append_results('SHA Hashing', SHA_results, submit_button);
+            append_results('AES Encryption', AES_results, submit_button);
+            append_results('PBKDF2 Hashing', PBKDF2_results, submit_button);
+
+            const calculating = document.getElementById('calculating');
+
+            calculating.remove();
+        }
+
+        test();
+    </script>
+</head>
+<body>
+    <form method="get" action="/">
+        <h1>Web Crypto API</h1>
+        <p id="calculating">Calculating results...</p>
+        <input type="submit" value="Home">
+    </form>
+</body>
+</html>
