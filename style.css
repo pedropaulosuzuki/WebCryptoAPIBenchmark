@@ -45,6 +45,11 @@ form h2 {
     font-size: 1.05rem;
 }
 
+form a {
+    text-decoration: none;
+    color: #489;
+}
+
 form p {
     margin: 1rem 0;
     width: 100%;
